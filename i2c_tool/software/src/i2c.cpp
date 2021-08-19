@@ -7,6 +7,7 @@ void I2c_write(uint8_t addr, uint8_t reg, uint8_t val)
     Wire.write(reg);
     Wire.write(val);
     Wire.endTransmission(true); // stop transmitting
+    // delay(20);
     
 }
 
