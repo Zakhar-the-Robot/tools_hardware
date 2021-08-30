@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+    },
+    "extensions": {
+        "unwantedRecommendations": [
+            "vsciot-vscode.vscode-arduino",
+            "googlecloudtools.cloudcode",
+            "mindaro.mindaro",
+            "ms-kubernetes-tools.vscode-kubernetes-tools",
+            "firefox-devtools.vscode-firefox-debug",
+            "ms-vscode.cpptools-extension-pack"
+
+        ],
+
+        "recommendations": [
+            "ms-vscode.cpptools",
+            "platformio.platformio-ide"
+        ]
+    }
+}
