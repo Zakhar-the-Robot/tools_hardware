@@ -30,6 +30,55 @@ enum CAN_DATA
     CAN_DATA_DATA5,
 };
 
+class CanShield
+{
+
+private:
+    const int LED_GREEN0 = A0;
+    const int LED_GREEN1 = A1;
+    const int LED_GREEN2 = A2;
+    const int LED_RED = A3;
+
+    const int BTN0 = 4;
+
+public:
+    CanShield()
+    {
+        pinMode(this->LED_GREEN0, OUTPUT);
+        pinMode(LED_GREEN1, OUTPUT);
+        pinMode(LED_GREEN2, OUTPUT);
+        pinMode(LED_RED, OUTPUT);
+        pinMode(BTN0, INPUT);
+    }
+
+    void SetGreen0(bool val)
+    {
+        digitalWrite(LED_GREEN0, (val ? HIGH : LOW));
+    }
+
+    void SetGreen1(bool val)
+    {
+        digitalWrite(LED_GREEN1, (val ? HIGH : LOW));
+    }
+
+    void SetGreen2(bool val)
+    {
+        digitalWrite(LED_GREEN2, (val ? HIGH : LOW));
+    }
+
+    void SetRed(bool val)
+    {
+        digitalWrite(LED_RED, (val ? HIGH : LOW));
+    }
+
+    bool GetButton0()
+    {
+        return !digitalRead(BTN0);
+    }
+};
+
+CanShield canShield;
+
 void Success()
 {
     // printf("Test passed!\n\r");
@@ -173,16 +222,17 @@ void loop()
             CanSend(0, false);
             // delay(300);
             CanSend(addr, true);
-            switch(addr){
-                case 0x2a0:
-                    addr = 0x2b0;
-                    break;
-                case 0x2b0:
-                    addr = 0x2c0;
-                    break;
-                default:
-                    addr = 0x2a0;
-                    break;
+            switch (addr)
+            {
+            case 0x2a0:
+                addr = 0x2b0;
+                break;
+            case 0x2b0:
+                addr = 0x2c0;
+                break;
+            default:
+                addr = 0x2a0;
+                break;
             }
 
             // digitalWrite(13, HIGH);
