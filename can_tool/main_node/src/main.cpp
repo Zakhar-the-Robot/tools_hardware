@@ -3,6 +3,7 @@
 #include <mcp2515.h>
 #include <LibPrintf.h>
 #include "zakhar_canbus.h"
+#include "CanShield.hpp"
 
 struct can_frame read_frame;
 struct can_frame write_frame;
@@ -29,55 +30,6 @@ enum CAN_DATA
     CAN_DATA_DATA4,
     CAN_DATA_DATA5,
 };
-
-class CanShield
-{
-
-private:
-    const int LED_GREEN0 = A0;
-    const int LED_GREEN1 = A1;
-    const int LED_GREEN2 = A2;
-    const int LED_RED = A3;
-
-    const int BTN0 = 4;
-
-public:
-    CanShield()
-    {
-        pinMode(this->LED_GREEN0, OUTPUT);
-        pinMode(LED_GREEN1, OUTPUT);
-        pinMode(LED_GREEN2, OUTPUT);
-        pinMode(LED_RED, OUTPUT);
-        pinMode(BTN0, INPUT);
-    }
-
-    void SetGreen0(bool val)
-    {
-        digitalWrite(LED_GREEN0, (val ? HIGH : LOW));
-    }
-
-    void SetGreen1(bool val)
-    {
-        digitalWrite(LED_GREEN1, (val ? HIGH : LOW));
-    }
-
-    void SetGreen2(bool val)
-    {
-        digitalWrite(LED_GREEN2, (val ? HIGH : LOW));
-    }
-
-    void SetRed(bool val)
-    {
-        digitalWrite(LED_RED, (val ? HIGH : LOW));
-    }
-
-    bool GetButton0()
-    {
-        return !digitalRead(BTN0);
-    }
-};
-
-CanShield canShield;
 
 void Success()
 {
@@ -195,7 +147,8 @@ void setup()
     while (!Serial)
         ;
     Serial.begin(115200);
-
+    canShield.Start();
+    canShield.SetGreen0(true);
     mcp2515.reset();
     mcp2515.setBitrate(CAN_125KBPS);
     mcp2515.setNormalMode();
@@ -206,6 +159,7 @@ void setup()
 
 void loop()
 {
+
     if (testing)
     {
 
