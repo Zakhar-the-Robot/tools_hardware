@@ -1,3 +1,9 @@
 [submodule "can_tool/lib/zklib_arduino_canbus"]
-	path = can_tool/lib/zklib_arduino_canbus
+	path = lib_arduino/zklib_arduino_canbus
 	url = git@github.com:an-dr/zklib_arduino_canbus.git
+[submodule "can_tool/lib/arduino-printf"]
+	path = lib_arduino/arduino-printf
+	url = https://github.com/embeddedartistry/arduino-printf.git
+[submodule "can_tool/lib/Arduino_FreeRTOS_Library"]
+	path = lib_arduino/Arduino_FreeRTOS_Library
+	url = https://github.com/feilipu/Arduino_FreeRTOS_Library.git
