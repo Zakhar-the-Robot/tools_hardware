@@ -4,6 +4,7 @@
 #include <LibPrintf.h>
 #include "zakhar_canbus.h"
 #include "CanShield.hpp"
+#include "canbus.hpp"
 
 struct can_frame read_frame;
 struct can_frame write_frame;
@@ -152,6 +153,7 @@ void setup()
     mcp2515.reset();
     mcp2515.setBitrate(CAN_125KBPS);
     mcp2515.setNormalMode();
+    devCanBus.Start(10);
     attachInterrupt(digitalPinToInterrupt(2), irqHandler, FALLING);
     pinMode(13, OUTPUT);
     Serial.println("Example: CAN Test Node");
