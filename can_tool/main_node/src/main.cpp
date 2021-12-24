@@ -4,7 +4,7 @@
 #include <LibPrintf.h>
 #include "zakhar_canbus.h"
 #include "CanShield.hpp"
-#include "canbus.hpp"
+#include "CanBus.hpp"
 
 struct can_frame read_frame;
 struct can_frame write_frame;
@@ -34,7 +34,6 @@ enum CAN_DATA
 
 void Success()
 {
-    // printf("Test passed!\n\r");
     Serial.println("Test passed!");
     res = true;
     // detachInterrupt(digitalPinToInterrupt(2));
@@ -147,59 +146,20 @@ void setup()
 
     while (!Serial)
         ;
-    Serial.begin(115200);
+    Serial.begin(9600);
+    printf("Example: CAN Test Node\n");
     canShield.Start();
     canShield.SetGreen0(true);
-    mcp2515.reset();
-    mcp2515.setBitrate(CAN_125KBPS);
-    mcp2515.setNormalMode();
+    // mcp2515.reset();
+    // mcp2515.setBitrate(CAN_125KBPS);
+    // mcp2515.setNormalMode();
+    // attachInterrupt(digitalPinToInterrupt(2), irqHandler, FALLING);
     devCanBus.Start(10);
-    attachInterrupt(digitalPinToInterrupt(2), irqHandler, FALLING);
-    pinMode(13, OUTPUT);
-    Serial.println("Example: CAN Test Node");
+    devCanBus.Stop();
 }
 
 void loop()
 {
+    // printf("Example: CAN Test Nod\n");
 
-    if (testing)
-    {
-
-        if (res)
-        {
-            detachInterrupt(digitalPinToInterrupt(2));
-            Serial.print("Result msg: ");
-            print_msg(read_frame);
-            testing = false;
-            Serial.println("[  SUCCESS  ]");
-        }
-        else
-        {
-            CanSend(0, false);
-            // delay(300);
-            CanSend(addr, true);
-            switch (addr)
-            {
-            case 0x2a0:
-                addr = 0x2b0;
-                break;
-            case 0x2b0:
-                addr = 0x2c0;
-                break;
-            default:
-                addr = 0x2a0;
-                break;
-            }
-
-            // digitalWrite(13, HIGH);
-            // delay(200);
-            // digitalWrite(13, LOW);
-            // delay(200);
-        }
-    }
-
-    // CanSend(0x2a2, false, 3, 0xa1, 0xa2, 0xa3);
-    // delay(500);
-    // CanSend(0x2a0, true);
-    // delay(500);
 }

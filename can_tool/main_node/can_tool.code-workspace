@@ -8,6 +8,14 @@
         },
     ],
     "settings": {
+        "files.associations": {
+            "*.html": "html",
+            "*.inc": "innopascal",
+            "*.log": "log",
+            "*.rst": "restructuredtext",
+            "*.txt": "plaintext",
+            "printf.c": "cpp"
+        }
     },
     "extensions": {
         "unwantedRecommendations": [
