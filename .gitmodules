@@ -7,3 +7,6 @@
 [submodule "lib_arduino/arduino-mcp2515"]
 	path = lib_arduino/arduino-mcp2515
 	url = git@github.com:an-dr/arduino-mcp2515.git
+[submodule "lib_arduino/TimerInterrupt"]
+	path = lib_arduino/TimerInterrupt
+	url = https://github.com/khoih-prog/TimerInterrupt.git

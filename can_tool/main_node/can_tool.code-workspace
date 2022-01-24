@@ -14,7 +14,24 @@
             "*.log": "log",
             "*.rst": "restructuredtext",
             "*.txt": "plaintext",
-            "printf.c": "cpp"
+            "printf.c": "cpp",
+            "array": "cpp",
+            "chrono": "cpp",
+            "deque": "cpp",
+            "format": "cpp",
+            "forward_list": "cpp",
+            "initializer_list": "cpp",
+            "list": "cpp",
+            "regex": "cpp",
+            "vector": "cpp",
+            "xhash": "cpp",
+            "xstring": "cpp",
+            "xtree": "cpp",
+            "xutility": "cpp",
+            "ios": "cpp",
+            "memory": "cpp",
+            "optional": "cpp",
+            "random": "cpp"
         }
     },
     "extensions": {
