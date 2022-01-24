@@ -4,6 +4,6 @@
 [submodule "can_tool/lib/arduino-printf"]
 	path = lib_arduino/arduino-printf
 	url = https://github.com/embeddedartistry/arduino-printf.git
-[submodule "can_tool/lib/Arduino_FreeRTOS_Library"]
-	path = lib_arduino/Arduino_FreeRTOS_Library
-	url = https://github.com/feilipu/Arduino_FreeRTOS_Library.git
+[submodule "lib_arduino/arduino-mcp2515"]
+	path = lib_arduino/arduino-mcp2515
+	url = git@github.com:an-dr/arduino-mcp2515.git
