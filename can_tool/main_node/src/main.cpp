@@ -20,7 +20,7 @@ void setup()
     printf("Example: CAN Test Node\n");
     canShield.Start();
     canShield.SetGreen0(true);
-    devCanBus.Start(10);
+    devCanBus.Start(10, 1, 1);
     // devCanBus.Stop();
 }
 

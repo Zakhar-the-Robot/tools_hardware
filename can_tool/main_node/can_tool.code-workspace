@@ -31,7 +31,9 @@
             "ios": "cpp",
             "memory": "cpp",
             "optional": "cpp",
-            "random": "cpp"
+            "random": "cpp",
+            "xiosbase": "cpp",
+            "xmemory": "cpp"
         }
     },
     "extensions": {
