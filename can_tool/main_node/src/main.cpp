@@ -6,7 +6,7 @@
 
 void RxCallback(const CanBus *dev, const can_frame &msg)
 {
-    printf("0x%08lx : %02x : %02x : %02x : %02x : %02x : %02x : %02x : %02x\n",
+    printf("0x%08lx : 0x%02x : 0x%02x : 0x%02x : 0x%02x : 0x%02x : 0x%02x : 0x%02x : 0x%02x\n",
            msg.can_id,
            msg.data[7],
            msg.data[6],
@@ -25,6 +25,8 @@ void setup()
     canShield.SetGreen0(true);
     devCanBus.Start(10, 1, 1);
     devCanBus.SetRxCallback(RxCallback);
+    Serial.println("sep=:");
+    Serial.println("Format_Rtr_Error_Id : D7 : D6 : D5 : D4 : D3 : D2 : D1 : D0");
 }
 
 void loop()
