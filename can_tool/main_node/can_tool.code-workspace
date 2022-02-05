@@ -1,0 +1,55 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../../lib_arduino"
+        },
+    ],
+    "settings": {
+        "files.associations": {
+            "*.html": "html",
+            "*.inc": "innopascal",
+            "*.log": "log",
+            "*.rst": "restructuredtext",
+            "*.txt": "plaintext",
+            "printf.c": "cpp",
+            "array": "cpp",
+            "chrono": "cpp",
+            "deque": "cpp",
+            "format": "cpp",
+            "forward_list": "cpp",
+            "initializer_list": "cpp",
+            "list": "cpp",
+            "regex": "cpp",
+            "vector": "cpp",
+            "xhash": "cpp",
+            "xstring": "cpp",
+            "xtree": "cpp",
+            "xutility": "cpp",
+            "ios": "cpp",
+            "memory": "cpp",
+            "optional": "cpp",
+            "random": "cpp",
+            "xiosbase": "cpp",
+            "xmemory": "cpp"
+        }
+    },
+    "extensions": {
+        "unwantedRecommendations": [
+            "vsciot-vscode.vscode-arduino",
+            "googlecloudtools.cloudcode",
+            "mindaro.mindaro",
+            "ms-kubernetes-tools.vscode-kubernetes-tools",
+            "firefox-devtools.vscode-firefox-debug",
+            "ms-vscode.cpptools-extension-pack"
+
+        ],
+
+        "recommendations": [
+            "ms-vscode.cpptools",
+            "platformio.platformio-ide"
+        ]
+    }
+}
