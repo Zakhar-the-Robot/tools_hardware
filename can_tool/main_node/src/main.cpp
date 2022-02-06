@@ -20,7 +20,8 @@ void RxCallback(const CanBus *dev, const can_frame &msg)
 
 void setup()
 {
-    Serial.begin(115200);
+    // HC-05 Bluetooth module should be configured to work with this speed!
+    Serial.begin(9600);
     canShield.Start();
     canShield.SetGreen0(true);
     devCanBus.Start(10, 1, 1);
