@@ -12,7 +12,8 @@ SAMPLE_WIDTH = 1
 CHANNELS_N = 1
 
 # Receiving config
-CHUNK_SIZE_SAMPLES = 1000
+COM_PORT = 'COM7'
+CHUNK_SIZE_SAMPLES = 4000
 RECORD_TIME_SEC = 10
 
 # Write config
@@ -42,7 +43,7 @@ def init():
     
     # init serial
     global ser
-    ser = serial.Serial('COM7', SERIAL_BAUDRATE)  # open serial port
+    ser = serial.Serial(COM_PORT, SERIAL_BAUDRATE, timeout=SAMPLE_PERIOD_US)  # open serial port
     while not ser.is_open:
         pass
     ser.flush()
@@ -51,30 +52,31 @@ def init():
 def get_data():
     BYTES_TO_GET = RECORD_TIME_SEC * SAMPLE_RATE_HZ * SAMPLE_WIDTH * CHANNELS_N
     bytes_rcvd_n = 0
+    start_time_ms  = get_now_ms()
     while bytes_rcvd_n < BYTES_TO_GET:
         bytes_to_read = CHUNK_SIZE_SAMPLES*SAMPLE_WIDTH
         new_data = ser.read(bytes_to_read)
         data.extend(list(new_data))
         bytes_rcvd_n += bytes_to_read
         # print(f"Read  {bytes_rcvd_n} of {BYTES_TO_GET} - {list(new_data)}")
-    print(f"[ DATA IS READY ]")    
+    print(f"[ DATA IS READY ] {bytes_rcvd_n} bytes, {get_now_ms() - start_time_ms} ms")
 
-def get_data_localtiming():
-    # BYTES_TO_GET = RECORD_TIME_SEC * SAMPLE_RATE * SAMPLE_WIDTH * CHANNELS_N
-    bytes_rcvd_n = 0
-    start_time_ms  = get_now_ms()
-    end_time_ms = start_time_ms + RECORD_TIME_SEC * 1000
+# def get_data_localtiming():
+#     # BYTES_TO_GET = RECORD_TIME_SEC * SAMPLE_RATE * SAMPLE_WIDTH * CHANNELS_N
+#     bytes_rcvd_n = 0
+#     start_time_ms  = get_now_ms()
+#     end_time_ms = start_time_ms + RECORD_TIME_SEC * 1000
     
-    while get_now_ms() < end_time_ms:
-        current_sample_time_ns = time.time_ns()
-        new_data = ser.read()
-        bytes_rcvd_n += 1
-        data.extend(list(new_data))
-        # print(f"Read  {bytes_rcvd_n}")
-        while time.time_ns() - current_sample_time_ns < SAMPLE_PERIOD_US * 1000:
-            # print(f"{time.time_ns() - current_sample_time_ns} < {SAMPLE_PERIOD_US * 1000}")
-            pass  # wait for a time for the next sample
-    print(f"[ DATA IS READY ] {bytes_rcvd_n} bytes")
+#     while get_now_ms() < end_time_ms:
+#         current_sample_time_ns = time.time_ns()
+#         new_data = ser.read()
+#         bytes_rcvd_n += 1
+#         data.extend(list(new_data))
+#         # print(f"Read  {bytes_rcvd_n}")
+#         while time.time_ns() - current_sample_time_ns < SAMPLE_PERIOD_US * 1000:
+#             # print(f"{time.time_ns() - current_sample_time_ns} < {SAMPLE_PERIOD_US * 1000}")
+#             pass  # wait for a time for the next sample
+#     print(f"[ DATA IS READY ] {bytes_rcvd_n} bytes")
 
 def write_data():
     with wave.open(FILE_WAV_PATH, "w") as f:
@@ -82,7 +84,7 @@ def write_data():
         f.setsampwidth(SAMPLE_WIDTH)
         f.setframerate(SAMPLE_RATE_HZ)
         f.writeframes(bytearray(data))
-    print(f"[ WROTE TO FILE ]")    
+        print(f"[ WROTE TO FILE ] Frames: {f.getnframes()}")    
     
         
         
