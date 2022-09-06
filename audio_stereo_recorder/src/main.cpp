@@ -1,16 +1,17 @@
 #include <Arduino.h>
 
 #define LEFT_MIC_ONLY 1
+#define MAX_ADC_VAL 255U
 
 const uint32_t SAMPLE_RATE = 8000;
-const uint64_t SERIAL_BAUDRATE = 230400;
+const uint64_t SERIAL_BAUDRATE = 460800;
 const uint8_t PIN_MIC_LEFT = A0;
 const uint8_t PIN_MIC_RIGHT = A1;
 
 uint8_t left = 128;
 uint8_t right = 0;
 uint64_t last_transmission_time = 0;
-uint32_t period_us = 10^6 / SAMPLE_RATE;
+const uint32_t PERIOD_US = 10^6 / SAMPLE_RATE;
 
 void setup() {
     Serial.begin(SERIAL_BAUDRATE);
@@ -24,17 +25,13 @@ void setup() {
     }
 }
 
-void _increase(uint8_t &left_mic,  uint8_t &right_mic){
-    left_mic++;
-    right_mic;
-}
-
 void _read_mics(uint8_t &left_mic,  uint8_t &right_mic){
-    left_mic = analogRead(PIN_MIC_LEFT);
-    right_mic = analogRead(PIN_MIC_RIGHT);
+    left_mic = MAX_ADC_VAL - analogRead(PIN_MIC_LEFT);
+    right_mic = MAX_ADC_VAL - analogRead(PIN_MIC_RIGHT);
 }
 
 void _send_data(uint8_t left_mic, uint8_t right_mic){
+    // Serial.println(left_mic);
     Serial.write(left_mic);
 #ifndef LEFT_MIC_ONLY
     Serial.write(right_mic);
@@ -50,8 +47,8 @@ void read_n_send()
 
 void loop() {
     
-    if (micros() - last_transmission_time >= period_us)
+    if (micros() - last_transmission_time >= PERIOD_US)
     {
-        read_n_send();
+    read_n_send();
     }
 }
